@@ -42,7 +42,7 @@ function verificaJWT(request, response, next) {
 const login = (request, response, next) => {
     const { nome, senha } = request.body;
 
-    pool.query('SELECT * FROM usuarios where login=$1 and senha=$2',
+    pool.query('SELECT * FROM usuarios where nome=$1 and senha=$2',
         [nome, senha], (error, results) => {
 
             if (error || results.rowCount == 0) {
