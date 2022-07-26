@@ -155,7 +155,7 @@ app.route('/artistas/:id')
 
 const getMusicas = (request, response) => {
     pool.query(`
-        select mus.codigo, mus.nome, mus.duracao, art.nome as artista
+        select mus.codigo, mus.nome, mus.duracao, art.nome as nomeArtista, art.codigo as codArtista
         from musicas mus INNER JOIN artistas art ON art.codigo = mus.codigo_artista
     `, (error, results) => {
         if (error) {
@@ -217,7 +217,7 @@ const getMusicaPorID = (request, response) => {
     const codigo = parseInt(request.params.id);
     pool.query(
         `
-        select mus.codigo, mus.nome, mus.duracao, art.nome as artista
+        select mus.codigo, mus.nome, mus.duracao, art.nome as nomeArtista, art.codigo as codArtista
         from musicas mus INNER JOIN artistas art ON art.codigo = mus.codigo_artista
         where mus.codigo = $1
     `, [codigo], (error, results) => {
